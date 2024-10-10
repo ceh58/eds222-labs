@@ -126,10 +126,10 @@ Here, we visualize our simple linear regression models above using the scatter p
 Use the `geom_smooth()` function with method argument set to `lm`, which stands for "linear model", to add the best fit OLS line to your scatter plots from Section 1. Use the option `se = FALSE` to turn off estimates of uncertainty. Don't worry, we'll dig into those soon.
 
 ```{r}
-ggplot(data = pie_crab) +
-  geom_point(aes(x = latitude, y = size)) +
+ggplot(data = pie_crab, aes(x = latitude, y = size)) +
+  geom_point() +
   #theme(aspect.ratio = 1) +
-  geom_smooth(aes(x = latitude, y = size), method = lm, formula = y~x, se = FALSE)
+  geom_smooth(method = lm, formula = y~x, se = FALSE)
 ```
 
 ## Residuals, Sum of Squared Errors
