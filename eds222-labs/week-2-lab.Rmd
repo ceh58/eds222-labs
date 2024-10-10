@@ -129,7 +129,9 @@ Use the `geom_smooth()` function with method argument set to `lm`, which stands 
 ggplot(data = pie_crab, aes(x = latitude, y = size)) +
   geom_point() +
   #theme(aspect.ratio = 1) +
-  geom_smooth(method = lm, formula = y~x, se = FALSE)
+  geom_smooth(method = lm, 
+              formula = y~x, 
+              se = FALSE)
 ```
 
 ## Residuals, Sum of Squared Errors
@@ -147,13 +149,21 @@ Using the regression of crab size on latitude:
 [^week-2-lab-4]: **Hint:** In `dplyr` you can use `add_predictions(mod)` where `mod` is a regression model to generate a new variable containing your model's predicted values.
 
 ```{r}
+pie_crab2 <- pie_crab
+crab_lm <- lm(size~latitude, pie_crab)
+pie_crab2 <- pie_crab2 %>%
+  mutate(predicted_size = predict(crab_lm),
+           size_residual = resid(crab_lm))
 
+#predict
+#resid
 ```
 
 2.  Make a histogram of your residuals. Do they look approximately normally distributed?
 
 ```{r}
-
+ggplot(pie_crab2, aes(x = size_residual)) + 
+  geom_histogram(bins = 30)
 ```
 
 3.  Compute the mean of your residuals. Is it basically zero?[^week-2-lab-5]
@@ -161,11 +171,13 @@ Using the regression of crab size on latitude:
 [^week-2-lab-5]: **Note:** OLS gives you this one for free. The OLS regression line will always go through the middle of your data, as it aims to minimize squared errors. So, you'll always end up with sample errors that are mean zero. This doesn't necessarily mean that in your population $u$ is mean zero!
 
 ```{r}
-
+mean(pie_crab2$size_residual)
 ```
 
 4.  Plot residuals against your independent variable, latitude. Does the variance look approximately constant across all values of latitude?
 
 ```{r}
-
+ggplot(pie_crab2, aes(x = latitude, y = size_residual)) +
+  geom_point() +
+  geom_hline(yintercept = 0, color = "firebrick")
 ```
