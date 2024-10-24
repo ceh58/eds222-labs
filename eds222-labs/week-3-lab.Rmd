@@ -148,7 +148,7 @@ Here is our regression: $$hwy_i=\beta_{0}+\beta_{1} \cdot vintage_i +\varepsilon
 summary(lm(hwy~year_fct, mpg))
 
 # B0 23.4274 <- highway mileage at 1999 (when x = 0) value of the REFERENCE LEVEL
-# B1 0.0256 <- change/difference between the two (2% change over 9 years)
+# B1 0.0256 <- change/difference between the two (2% change over 9 years) change from REFERENCE LEVEL
 
 ggplot(mpg, aes(x= year_fct, y = hwy)) +
   geom_point() +
