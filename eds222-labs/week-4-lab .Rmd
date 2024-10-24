@@ -129,9 +129,11 @@ In this case, the interaction model added a new variable to our regression, so w
 
 ```{r}
 # no interaction
-
+without <- summary(lm(mod))$adj.r.squared
+without
 # with the interaction
-
+with <- summary(lm(mod2))$adj.r.squared
+with
 ```
 
 Since the adjusted $R^2$ value declined slightly, we conclude that the interaction model did *not* meaningfully improve model fit.
@@ -140,9 +142,11 @@ Note that if you compare $R^2$ across models, without accounting for the additio
 
 ```{r}
 # no interaction
-
+without2 <- summary(lm(mod))$r.squared
+without2
 # with the interaction
-
+with2 <- summary(lm(mod2))$r.squared
+with2
 ```
 
 For multiple regression, you should generally rely on adjusted $R^2$ and not $R^2$.
