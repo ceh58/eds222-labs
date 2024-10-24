@@ -101,11 +101,20 @@ We will use `ggplot2` with `augment()` to obtain predictions, in combination wit
 mpg_new %>%
   ggplot(aes(x = displ, y = hwy, color = year_cat)) +
     geom_point() +
-    geom_line(data = augment(mod2), aes(y = .fitted, color = year_cat)) + 
+    geom_abline(slope = coef(mod2)[2],
+                intercept = coef(mod2)[1],
+                color = "coral") +
+    geom_abline(slope = (coef(mod2)[2])+coef(mod2)[4],
+                intercept = (coef(mod2)[1] + coef(mod2)[3]),
+                color = "cyan") +
+    #geom_line(data = augment(mod2), aes(y = .fitted, color = year_cat)) + 
     labs(x = "Engine Displacement (L)",
          y = "Highway (mpg)") +
-    scale_colour_discrete("Year")
+    scale_colour_discrete("Year") +
+    expand_limits(x=0, y=0)
  
+    
+summary(mod2)
 ```
 
 # Section 3: Adjusted $R^2$
